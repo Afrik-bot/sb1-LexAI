@@ -1,0 +1,176 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const teamMembers = [
+  {
+    name: "Dr. James Wilson",
+    role: "Editor-in-Chief",
+    bio: "Former tech policy advisor with 15+ years experience in AI regulation"
+  },
+  {
+    name: "Maria Garcia",
+    role: "Senior Legal Analyst",
+    bio: "Specialized in international technology law and AI governance"
+  },
+  {
+    name: "Dr. Wei Chen",
+    role: "Asia-Pacific Editor",
+    bio: "Expert in Chinese tech policy and AI development frameworks"
+  }
+];
+---
+
+<Layout title="About - LexAI">
+  <main>
+    <div class="about-header">
+      <h1>About Us</h1>
+      <p class="subtitle">
+        Dedicated to tracking and analyzing AI law, ethics, and regulation worldwide
+      </p>
+    </div>
+
+    <div class="mission-section">
+      <h2>Our Mission</h2>
+      <p>
+        We strive to provide comprehensive, accurate, and timely information about
+        AI law, ethics, and policy developments across the globe. Our team of experts
+        analyzes complex regulatory frameworks and presents them in an accessible format
+        for both technical and non-technical audiences.
+      </p>
+    </div>
+
+    <div class="team-section">
+      <h2>Our Team</h2>
+      <div class="team-grid">
+        {teamMembers.map(member => (
+          <div class="team-card">
+            <h3>{member.name}</h3>
+            <p class="role">{member.role}</p>
+            <p class="bio">{member.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="methodology-section">
+      <h2>Our Methodology</h2>
+      <div class="methodology-grid">
+        <div class="methodology-card">
+          <h3>Research Process</h3>
+          <p>
+            Our team monitors government websites, legal databases, and official
+            publications across multiple jurisdictions. We verify all information
+            through primary sources and expert review.
+          </p>
+        </div>
+        <div class="methodology-card">
+          <h3>Analysis Framework</h3>
+          <p>
+            We analyze regulations through multiple lenses: technical feasibility,
+            legal implications, ethical considerations, and practical implementation
+            challenges.
+          </p>
+        </div>
+        <div class="methodology-card">
+          <h3>Quality Assurance</h3>
+          <p>
+            All content undergoes rigorous fact-checking and review by our expert
+            panel before publication. We regularly update our articles to reflect
+            the latest developments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 6rem auto 0;
+    padding: 1rem;
+    width: 1200px;
+    max-width: calc(100% - 2rem);
+  }
+
+  .about-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--text);
+  }
+
+  .subtitle {
+    color: #64748b;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .mission-section {
+    margin-bottom: 4rem;
+  }
+
+  .mission-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #1a1f36;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+    color: var(--text);
+  }
+
+  .team-grid,
+  .methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .team-card,
+  .methodology-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .team-card h3,
+  .methodology-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--text);
+  }
+
+  .role {
+    color: rgb(var(--accent));
+    font-weight: 500;
+    margin: 0 0 0.75rem;
+  }
+
+  .bio,
+  .methodology-card p {
+    color: #64748b;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .mission-section p {
+      font-size: 1rem;
+    }
+  }
+</style>

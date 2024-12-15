@@ -1,0 +1,111 @@
+---
+import type { Update } from '../lib/api';
+
+interface Props {
+  ...Partial<Update>;
+}
+
+const { title, date, category, summary, source, sourceUrl, region } = Astro.props;
+
+const regionEmoji = {
+  us: '🇺🇸',
+  eu: '🇪🇺',
+  cn: '🇨🇳'
+};
+
+const categoryColors: Record<Update['category'], string> = {
+  legislation: 'bg-blue-100 text-blue-800',
+  court: 'bg-purple-100 text-purple-800',
+  policy: 'bg-green-100 text-green-800',
+  ethics: 'bg-orange-100 text-orange-800',
+  compliance: 'bg-teal-100 text-teal-800'
+};
+---
+
+<article class="update-card">
+  <div class="card-header">
+    <span class="region-indicator">
+      {regionEmoji[region as keyof typeof regionEmoji]}
+    </span>
+    <span class={`category ${categoryColors[category as keyof typeof categoryColors]}`}>
+      {category}
+    </span>
+    <time datetime={date.toISOString()}>
+      {date.toLocaleDateString('en-US', { 
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      })}
+    </time>
+  </div>
+  
+  <h3 class="card-title">{title}</h3>
+  <p class="card-summary">{summary}</p>
+  
+  <div class="card-footer">
+    <a href={sourceUrl} target="_blank" rel="noopener noreferrer" class="source-link">
+      Source: {source}
+    </a>
+  </div>
+</article>
+
+<style>
+  .update-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+
+  .update-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .region-indicator {
+    font-size: 1.2em;
+  }
+
+  .category {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 500;
+  }
+
+  time {
+    color: #64748b;
+    margin-left: auto;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+    color: var(--text);
+  }
+
+  .card-summary {
+    color: #64748b;
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+
+  .source-link {
+    color: rgb(var(--accent));
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .source-link:hover {
+    text-decoration: underline;
+  }
+</style>

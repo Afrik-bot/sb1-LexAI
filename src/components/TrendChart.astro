@@ -1,0 +1,99 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  data: {
+    labels: string[];
+    values: number[];
+  };
+}
+
+const { title, description, data } = Astro.props;
+---
+
+<div class="trend-card">
+  <h3 class="trend-title">{title}</h3>
+  <p class="trend-description">{description}</p>
+  <div class="chart-container">
+    <div class="chart">
+      {data.values.map((value, index) => (
+        <div class="bar-container">
+          <div 
+            class="bar" 
+            style={`height: ${(value / Math.max(...data.values)) * 100}%`}
+          >
+            <span class="value">{value}</span>
+          </div>
+          <span class="label">{data.labels[index]}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .trend-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .trend-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--text);
+  }
+
+  .trend-description {
+    color: #64748b;
+    margin: 0 0 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .chart-container {
+    padding: 1rem 0;
+  }
+
+  .chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 200px;
+    gap: 1rem;
+  }
+
+  .bar-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .bar {
+    width: 100%;
+    background: rgb(var(--accent));
+    border-radius: 6px 6px 0 0;
+    transition: height 0.3s ease;
+    position: relative;
+    min-height: 20px;
+  }
+
+  .value {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: rgb(var(--accent));
+    font-weight: 500;
+  }
+
+  .label {
+    font-size: 0.8rem;
+    color: #64748b;
+    text-align: center;
+  }
+</style>

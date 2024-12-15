@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrendChart from '../components/TrendChart.astro';
+
+const mockRegulationTrends = {
+  labels: ['2020', '2021', '2022', '2023', '2024'],
+  values: [12, 18, 25, 42, 56]
+};
+
+const mockAiPolicyTrends = {
+  labels: ['US', 'EU', 'China', 'UK', 'Japan'],
+  values: [35, 48, 42, 28, 25]
+};
+---
+
+<Layout title="AI Law & Ethics Trends - LexAI">
+  <main>
+    <div class="trends-header">
+      <h1>Regulatory Trends</h1>
+      <p class="subtitle">
+        Analyzing patterns and developments in AI regulation worldwide
+      </p>
+    </div>
+
+    <div class="trends-grid">
+      <TrendChart
+        title="AI Regulations by Year"
+        description="Number of major AI-related regulations and policies introduced globally"
+        data={mockRegulationTrends}
+      />
+      <TrendChart
+        title="Active AI Policies by Region"
+        description="Current number of active AI policies and regulations by major regions"
+        data={mockAiPolicyTrends}
+      />
+    </div>
+
+    <div class="key-findings">
+      <h2>Key Findings</h2>
+      <div class="findings-grid">
+        <div class="finding-card">
+          <h3>Increasing Regulation</h3>
+          <p>Global AI regulations have increased by 180% since 2020, with the EU leading in comprehensive frameworks.</p>
+        </div>
+        <div class="finding-card">
+          <h3>Regional Variations</h3>
+          <p>Different approaches to AI regulation across regions, with the EU focusing on rights-based frameworks while China emphasizes development.</p>
+        </div>
+        <div class="finding-card">
+          <h3>Emerging Focus Areas</h3>
+          <p>Growing emphasis on AI transparency, accountability, and ethical considerations in regulatory frameworks.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 6rem auto 0;
+    padding: 1rem;
+    width: 1200px;
+    max-width: calc(100% - 2rem);
+  }
+
+  .trends-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--text);
+  }
+
+  .subtitle {
+    color: #64748b;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .trends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .key-findings {
+    margin-top: 4rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+    color: var(--text);
+  }
+
+  .findings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .finding-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .finding-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+    color: var(--text);
+  }
+
+  .finding-card p {
+    color: #64748b;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .trends-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

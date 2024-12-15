@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RegionFilter from '../components/RegionFilter.astro';
+import SearchBar from '../components/SearchBar.astro';
+import UpdateCard from '../components/UpdateCard.astro';
+import { mockUpdates } from '../lib/api';
+
+const updates = mockUpdates;
+---
+
+<Layout title="Latest Updates - LexAI">
+  <main>
+    <div class="updates-header">
+      <h1>Latest Regulatory Updates</h1>
+      <p class="subtitle">
+        Track the latest developments in AI, robotics, and BCI regulations worldwide.
+      </p>
+    </div>
+
+    <div class="filters-container">
+      <SearchBar />
+      <RegionFilter />
+    </div>
+
+    <div class="updates-grid">
+      {updates.map((update, index) => (
+        <UpdateCard {...update} />
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 6rem auto 0;
+    padding: 1rem;
+    width: 1200px;
+    max-width: calc(100% - 2rem);
+  }
+
+  .updates-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--text);
+  }
+
+  .subtitle {
+    color: #64748b;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .filters-container {
+    margin-bottom: 2rem;
+  }
+
+  .updates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .updates-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

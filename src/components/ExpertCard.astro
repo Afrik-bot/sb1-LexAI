@@ -1,0 +1,75 @@
+---
+import type { Expert } from '../lib/api';
+
+interface Props extends Partial<Expert> {}
+
+const { name, title, organization, imageUrl, expertise } = Astro.props;
+---
+
+<div class="expert-card">
+  <div class="expert-header">
+    <img src={imageUrl} alt={name} class="expert-image" />
+    <div class="expert-info">
+      <h3 class="expert-name">{name}</h3>
+      <p class="expert-title">{title}</p>
+      <p class="expert-org">{organization}</p>
+    </div>
+  </div>
+  <div class="expert-expertise">
+    {expertise.map(item => (
+      <span class="expertise-tag">{item}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .expert-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .expert-header {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .expert-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .expert-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+    color: var(--text);
+  }
+
+  .expert-title,
+  .expert-org {
+    color: #64748b;
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .expert-expertise {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .expertise-tag {
+    background: rgb(var(--accent-light), 0.1);
+    color: rgb(var(--accent));
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+</style>

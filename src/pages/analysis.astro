@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ExpertCard from '../components/ExpertCard.astro';
+import { mockExperts, mockAnalyses } from '../lib/api';
+
+const experts = mockExperts;
+const featuredAnalyses = mockAnalyses;
+
+---
+
+<Layout title="Expert Analysis - LexAI">
+  <main>
+    <div class="analysis-header">
+      <h1>Expert Analysis</h1>
+      <p class="subtitle">
+        Insights from leading experts in AI regulation, ethics, and policy
+      </p>
+    </div>
+
+    <div class="experts-section">
+      <h2>Our Expert Contributors</h2>
+      <div class="experts-grid">
+        {experts.map((expert, index) => (
+          <ExpertCard {...expert} />
+        ))}
+      </div>
+    </div>
+
+    <div class="featured-analysis">
+      <h2>Featured Analysis</h2>
+      <div class="analysis-grid">
+        {featuredAnalyses.map((analysis, index) => (
+          <article class="analysis-card">
+            <h3>{analysis.title}</h3>
+            <p class="author">By {analysis.author.name}</p>
+            <p class="excerpt">{analysis.summary}</p>
+            <a href={`/analysis/${index + 1}`} class="read-more">Read Analysis →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 6rem auto 0;
+    padding: 1rem;
+    width: 1200px;
+    max-width: calc(100% - 2rem);
+  }
+
+  .analysis-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--text);
+  }
+
+  .subtitle {
+    color: #64748b;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+    color: var(--text);
+  }
+
+  .experts-section {
+    margin-bottom: 4rem;
+  }
+
+  .experts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 2rem;
+  }
+
+  .analysis-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .analysis-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--text);
+  }
+
+  .author {
+    color: rgb(var(--accent));
+    font-weight: 500;
+    margin: 0 0 1rem;
+  }
+
+  .excerpt {
+    color: #64748b;
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+
+  .read-more {
+    color: rgb(var(--accent));
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .read-more:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .analysis-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

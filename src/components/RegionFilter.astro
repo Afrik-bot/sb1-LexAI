@@ -1,0 +1,78 @@
+---
+const regions = [
+  { id: 'us', name: 'United States', flag: '🇺🇸' },
+  { id: 'eu', name: 'European Union', flag: '🇪🇺' },
+  { id: 'cn', name: 'China', flag: '🇨🇳' }
+];
+
+interface Props {
+  activeRegion?: string;
+}
+
+const { activeRegion } = Astro.props;
+---
+
+<div class="region-filter">
+  <div class="filter-header">Filter by Region</div>
+  <div class="region-buttons">
+    {regions.map(region => (
+      <a
+        href={`/region/${region.id}`}
+        class:list={[
+          'region-button',
+          { active: activeRegion === region.id }
+        ]}
+      >
+        <span class="region-flag">{region.flag}</span>
+        <span class="region-name">{region.name}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .region-filter {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+
+  .filter-header {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .region-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .region-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background: var(--background);
+    color: var(--text);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .region-button:hover {
+    background: rgb(var(--accent-light), 0.1);
+  }
+
+  .region-button.active {
+    background: rgb(var(--accent));
+    color: white;
+  }
+
+  .region-flag {
+    font-size: 1.2em;
+  }
+</style>
